@@ -11,8 +11,12 @@ bool IsDigit(char c, size_t base = 10) {
         "0123456789"
         "abcdefghijklmnopqrstuvwxyz";
     if (base > available.size()) {
-        throw std::runtime_error(__func__": base is more than 36 is unavailable");
+        throw std::runtime_error(std::string(__func__) + ": base is more than 36 is unavailable");
     }
+    if (base < 2) {
+        throw std::runtime_error(std::string(__func__) + ": base is less than 2");
+    }
+    c = std::tolower(c);
     bool rv = false;
     for (size_t i = 0; i < base; ++i) {
         if (c == available[i]) {
@@ -57,4 +61,4 @@ bool IsUInt(const std::string& str, size_t base = 10) {
     return rv;
 }
 
-}
+} // namespace idle
